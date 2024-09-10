@@ -33,7 +33,7 @@
 	],
 	"containerEnv": {
 		"SHELL": "/bin/bash",
-		"PDK": "sky130A",
+		"PDK": "ihp-sg13g2",
 		"DISPLAY": "${localEnv:DISPLAY}",
 		"LIBGL_ALWAYS_INDIRECT": "1"
 	}
