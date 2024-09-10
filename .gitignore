@@ -5,6 +5,7 @@ __pycache__/
 
 # C extensions
 *.so
+*.fsp
 
 # Distribution / packaging
 .Python
@@ -77,6 +78,7 @@ target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
+**/*.ipynb_checkpoints/
 
 # IPython
 profile_default/
@@ -154,9 +156,25 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-# PyCharm
-#  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
-#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
-#  and can be added to the global gitignore or merged into this file.  For a more nuclear
-#  option (not recommended) you can uncomment the following to ignore the entire idea folder.
-#.idea/
+# Others
+
+*.DS_Store
+*Thumbs.db
+**/.vscode
+
+# Klayout
+*.lyrdb
+*.lvsdb
+**/drc_run_*/
+
+# Magic / Netgen
+
+**/comp.out
+*.ext
+*.nodes
+*.sim
+*.drc
+*.raw
+
+# NGSpice
+simulations
