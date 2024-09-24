@@ -1,14 +1,22 @@
-** sch_path: /home/designer/shared/IHP_AnalogIC_Preworkshop_Sept2024/sg13_lv_nmos_charac_IHP.sch
-**.subckt sg13_lv_nmos_charac_IHP g1 d1
+** sch_path: /home/designer/shared/IHP_AnalogIC_Preworkshop_Sept2024/sg13_cstest_IHP.sch
+**.subckt sg13_cstest_IHP g1 d1 ref g2 d2
 *.ipin g1
 *.iopin d1
-XM1 d1 g1 GND GND sg13_lv_nmos w=1u l=0.5u ng=1 m=1
+*.ipin ref
+*.iopin g2
+*.iopin d2
+XM1 d1 g1 GND GND sg13_lv_nmos w=1.0u l=0.45u ng=5 m=1
+E1 g2 GND d2 ref 1000
+I0 VDD d2 120u
+XM2 d2 g2 net1 GND sg13_lv_nmos w=1.0u l=0.45u ng=5 m=1
+Vtest net1 GND 0
 **** begin user architecture code
 
 
 
 vgs g1 0 dc=0.9
 vds d1 0 dc=0.9
+vdscs ref 0 0.9
 
 .control
 save all
@@ -29,8 +37,12 @@ let vgsn = @n.xm1.nsg13_lv_nmos[vgs]
 let vov1 = v(g1) - vthn
 let vov2 = 2*idn/gmn
 
+let idncs = @n.xm2.nsg13_lv_nmos[ids]
+
 plot idn
 *plot log(idn)
+plot idncs
+plot i(vtest)
 
 *let W = 5e-6
 *let a = gmn/idn
@@ -59,4 +71,5 @@ plot idn
 **** end user architecture code
 **.ends
 .GLOBAL GND
+.GLOBAL VDD
 .end

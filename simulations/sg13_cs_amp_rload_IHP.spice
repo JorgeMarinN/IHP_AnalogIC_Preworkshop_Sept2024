@@ -1,0 +1,54 @@
+** sch_path: /home/designer/shared/IHP_AnalogIC_Preworkshop_Sept2024/sg13_cs_amp_rload_IHP.sch
+**.subckt sg13_cs_amp_rload_IHP g2 vout
+*.iopin g2
+*.iopin vout
+XM2 vout g2 net1 net1 sg13_lv_nmos w=10u l=0.5u ng=5 m=1
+Vtest net1 GND 0
+R1 VDD vout 1k m=1
+**** begin user architecture code
+
+*.option wnflag=1
+vds ref 0 0.9
+vsup VDD 0 1.8
+vin g2 0 dc=0.9 ac=1
+
+cload vout 0 5p
+
+.control
+save all
+
+save @n.xm2.nsg13_lv_nmos[gm]
+save @n.xm2.nsg13_lv_nmos[ids]
+save @n.xm2.nsg13_lv_nmos[gds]
+
+*dc vin -0.01 0.01 0.001
+
+let gdsn = @n.xm2.nsg13_lv_nmos[gds]
+let gmn = @n.xm2.nsg13_lv_nmos[gm]
+let idn = @n.xm2.nsg13_lv_nmos[ids]
+let ao = gmn / gdsn
+
+plot deriv(v(vout)) vs v(vout) ao vs v(vout)
+plot idn
+plot i(vtest)
+
+ac dec 100 1 1T
+plot vdb(vout)
+
+.endc
+
+
+
+.param corner=0
+
+.if (corner==0)
+.lib cornerMOSlv.lib mos_tt
+.lib cornerRES.lib res_typ
+.lib cornerCAP.lib cap_typ
+.endif
+
+**** end user architecture code
+**.ends
+.GLOBAL GND
+.GLOBAL VDD
+.end

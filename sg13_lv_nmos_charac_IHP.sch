@@ -37,7 +37,7 @@ save @n.xm1.nsg13_lv_nmos[ids]
 save @n.xm1.nsg13_lv_nmos[gm]
 
 
-dc vgs 0 1.8 0.1
+dc vds 0 1.8 0.1
 
 let idn = @n.xm1.nsg13_lv_nmos[ids]
 let gmn = @n.xm1.nsg13_lv_nmos[gm]
@@ -67,9 +67,9 @@ C {devices/ipin.sym} 1090 -360 0 0 {name=p1 lab=g1}
 C {devices/iopin.sym} 1330 -530 0 0 {name=p2 lab=d1}
 C {devices/gnd.sym} 1180 -230 0 0 {name=l3 lab=GND}
 C {sg13g2_pr/sg13_lv_nmos.sym} 1160 -360 2 1 {name=M1
-L=0.5u
-W=5u
-ng=5
+l=0.5u
+w=1u
+ng=1
 m=1
 model=sg13_lv_nmos
 spiceprefix=X
